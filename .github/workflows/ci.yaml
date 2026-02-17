@@ -36,8 +36,10 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/flutter-web-app:latest .
-
-    - name: Push Docker image
-      run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/flutter-web-app:latest
+          TAG=$(echo $GITHUB_SHA | cut -c1-7)
+          if [ "${GITHUB_REF##*/}" == "main" ]; then
+            docker build -t hakimsamouh/flutter-web:prod-$TAG .
+            docker push hakimsamouh/flutter-web:prod-$TAG
+          else
+            docker build -t hakimsamouh/flutter-web:develop-$TAG .
+            docker push hakimsamouh/flutter-web:develop-$TAG
