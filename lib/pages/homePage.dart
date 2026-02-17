@@ -24,7 +24,7 @@ class _Homepagetate extends State<Homepage> {
 
      body: ListView(
       children: [
-      Container(height: 200,child:   FutureBuilder<List<Employe>>(
+      SizedBox(height: 200,child:   FutureBuilder<List<Employe>>(
   future: employeprovider.getUsers(),
   builder: (BuildContext context, AsyncSnapshot<List<Employe>> snapshot) {
     
@@ -59,12 +59,12 @@ class _Homepagetate extends State<Homepage> {
     return ListView.builder(
       itemCount: employees.length,
       itemBuilder: (BuildContext context, int index) {
-        return  _cardlist_employee(context,employees,index);
+        return  _cardlistEmployee(context,employees,index);
       },
     );
   },
 ),)
-    , Container(height: 100,child: Row(
+    , SizedBox(height: 100,child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [Container(height: 25,color: Colors.amberAccent,child: Text("description completa "),),Container(child: Text("ver mas ddetalles"),  height: 25,color: const Color.fromARGB(255, 13, 180, 157)),],
     ),)
@@ -76,7 +76,7 @@ class _Homepagetate extends State<Homepage> {
 
   }
   
- _cardlist_employee(BuildContext context, List<Employe> employees, int index) {
+ Card _cardlistEmployee(BuildContext context, List<Employe> employees, int index) {
 final employee = employees[index];
     return Card(
       margin: EdgeInsets.only(top: 12.55),
@@ -90,8 +90,8 @@ final employee = employees[index];
     borderRadius: BorderRadius.circular(12), // opcional
     child: FadeInImage.assetNetwork(
       placeholder: 'assets/images/no-image.png',
-      image: (employee.imageUrl != null && employee.imageUrl!.isNotEmpty)
-          ? employee.imageUrl!
+      image: (employee.imageUrl.isNotEmpty)
+          ? employee.imageUrl
           : 'https://via.placeholder.com/25',
       fit: BoxFit.cover,
       imageErrorBuilder: (context, error, stackTrace) {

@@ -1,12 +1,12 @@
 // To parse this JSON data, do
 //
-//     final Employe = EmployeFromJson(jsonString);
+//     final employe = employeFromJson(jsonString);
 
 import 'dart:convert';
 
-Employe EmployeFromJson(String str) => Employe.fromJson(json.decode(str));
+Employe employeFromJson(String str) => Employe.fromJson(json.decode(str));
 
-String EmployeToJson(Employe data) => json.encode(data.toJson());
+String employeToJson(Employe data) => json.encode(data.toJson());
 
 class Employes {
   List<Employe> items = [];
@@ -14,8 +14,7 @@ class Employes {
   Employes();
 
   Employes.fromJsonList(List<dynamic> jsonList) {
-    if (jsonList == null) return;
-
+   
     for (var item in jsonList) {
       final user = Employe.fromJson(item);
       items.add(user);
