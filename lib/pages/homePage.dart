@@ -47,7 +47,7 @@ class _Homepagetate extends State<Homepage> {
       return const Center(
         child:Column(children: [
           Divider(),
-          CircularProgressIndicator(color: Colors.purple,),
+          CircularProgressIndicator(color: Color.fromARGB(255, 151, 111, 158),),
            Text('No hay empleados disponibles')
         ],),
       );
