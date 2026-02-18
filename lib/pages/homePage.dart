@@ -66,7 +66,7 @@ class _Homepagetate extends State<Homepage> {
 ),)
     , SizedBox(height: 100,child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [Container(height: 25,color: Colors.amberAccent,child: Text("description completa "),),Container(child: Text("ver mas Detalles cd "),  height: 25,color: const Color.fromARGB(255, 13, 180, 157)),],
+      children: [Container(width: 100,height: 45,color: const Color.fromARGB(255, 35, 75, 11),child: Text("description completa nuevo feature "),),Container(width: 100,height: 25,color: const Color.fromARGB(255, 13, 180, 157),child: Text("ver mas Detalles aqui "),),],
     ),)
      
       ],
