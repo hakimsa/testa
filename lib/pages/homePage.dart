@@ -48,7 +48,7 @@ class _Homepagetate extends State<Homepage> {
         child:Column(children: [
           Divider(),
           CircularProgressIndicator(color: Color.fromARGB(255, 151, 111, 158),),
-           Text('No hay empleados disponibles')
+           Text('No hay empleados ok disponibles')
         ],),
       );
     }
