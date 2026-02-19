@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:testa/models/employe.dart';
 import 'package:testa/services/employe_provider.dart';
 
-class home_page extends StatefulWidget {
-  const home_page({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<home_page> createState() => _home_pagestate();
+  State<HomePage> createState() => _HomePageState();
 }
 
 Employeprovider employeprovider = Employeprovider();
@@ -15,7 +15,7 @@ void initState() {
   employeprovider.getUsers();
 }
 
-class _home_pagestate extends State<home_page> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     setState(() {
