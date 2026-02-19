@@ -79,9 +79,9 @@ class _HomePageState extends State<HomePage> {
                   child: Text("description completa "),
                 ),
                 Container(
-                  child: Text("ver mas Detalles cd "),
                   height: 25,
                   color: const Color.fromARGB(255, 13, 180, 157),
+                  child: Text("ver mas Detalles cd "),
                 ),
               ],
             ),
