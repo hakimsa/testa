@@ -47,7 +47,7 @@ class _Homepagetate extends State<Homepage> {
       return const Center(
         child:Column(children: [
           Divider(),
-          CircularProgressIndicator(color: Color.fromARGB(255, 151, 111, 158),),
+          CircularProgressIndicator(color: Color.fromARGB(255, 180, 15, 209),),
            Text('No hay empleados ok disponibles')
         ],),
       );
@@ -66,7 +66,7 @@ class _Homepagetate extends State<Homepage> {
 ),)
     , SizedBox(height: 100,child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [Container(width: 100,height: 45,color: const Color.fromARGB(255, 35, 75, 11),child: Text("description completa nuevo feature "),),Container(width: 100,height: 25,color: const Color.fromARGB(255, 13, 180, 157),child: Text("ver mas Detalles aqui "),),],
+      children: [Container(width: 100,height: 145,color: const Color.fromARGB(255, 35, 75, 11),child: Text("description completa nuevo feature Production  "),),Container(width: 150,height: 225,color: const Color.fromARGB(255, 35, 130, 118),child: Text("ver mas Detalles aqui "),),],
     ),)
      
       ],
