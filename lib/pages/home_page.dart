@@ -33,17 +33,17 @@ class _HomePageState extends State<HomePage> {
                     BuildContext context,
                     AsyncSnapshot<List<Employe>> snapshot,
                   ) {
-                    // 🔄 Mientras carga
+                  
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     }
 
-                    // ❌ Si hay error
+                 
                     if (snapshot.hasError) {
                       return Center(child: Text('Error: ${snapshot.error}'));
                     }
 
-                    // ⚠️ Si no hay datos
+                    
                     if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return const Center(
                         child: Column(
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
 
-                    // ✅ Cuando hay datos
+                   
                     final employees = snapshot.data!;
 
                     return ListView.builder(
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   height: 25,
                   color: Colors.amberAccent,
-                  child: Text("description completa "),
+                  child: Text("description completa development"),
                 ),
                 Container(
                   height: 25,
