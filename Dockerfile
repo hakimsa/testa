@@ -1,7 +1,7 @@
 FROM nginx:1.26.2-alpine
 
 # Crear usuario no-root
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+#RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 RUN apk update && apk upgrade
 
 # Copiar archivos
