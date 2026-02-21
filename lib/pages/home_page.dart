@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             Divider(),
-                            CircularProgressIndicator(color: Colors.purple),
-                            Text('No hay empleados disponibles'),
+                            CircularProgressIndicator(color: Color.fromARGB(255, 6, 189, 91)),
+                            Text('No hay empleados develop disponibles'),
                           ],
                         ),
                       );
