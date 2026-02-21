@@ -8,7 +8,7 @@ RUN apk update && apk upgrade
 COPY build/web /usr/share/nginx/html
 
 # Cambiar permisos
-RUN chown -R appuser:appgroup /usr/share/nginx/html
+#RUN chown -R appuser:appgroup /usr/share/nginx/html
 
 USER appuser
 
