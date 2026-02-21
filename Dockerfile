@@ -10,8 +10,6 @@ COPY build/web /usr/share/nginx/html
 # Cambiar permisos
 #RUN chown -R appuser:appgroup /usr/share/nginx/html
 
-USER appuser
-
 EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
