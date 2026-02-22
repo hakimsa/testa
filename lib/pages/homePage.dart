@@ -78,7 +78,7 @@ class _Homepagetate extends State<Homepage> {
             end: Alignment.bottomRight,
           ),
         ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("descriptiiiion completa nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),
+        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),
          Container(
           decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(15),
