@@ -91,7 +91,7 @@ class _Homepagetate extends State<Homepage> {
           decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
-            colors: [Color.fromARGB(220, 0, 0, 0), Color.fromARGB(220, 1, 65, 44)],
+            colors: [Color.fromARGB(220, 0, 0, 0), Color.fromARGB(220, 208, 226, 13)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
