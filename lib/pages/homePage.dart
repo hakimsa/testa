@@ -24,7 +24,8 @@ class _Homepagetate extends State<Homepage> {
 
      body: ListView(
       children: [
-      SizedBox(height: 200,child:   FutureBuilder<List<Employe>>(
+        SizedBox(height: 30,),
+      SizedBox(height: 300,child:   FutureBuilder<List<Employe>>(
   future: employeprovider.getUsers(),
   builder: (BuildContext context, AsyncSnapshot<List<Employe>> snapshot) {
     
@@ -66,11 +67,12 @@ class _Homepagetate extends State<Homepage> {
 ),)
     , SizedBox(height: 100,child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [Container(margin: EdgeInsets.all(15),width: 250,height: 225,color: const Color.fromARGB(255, 134, 209, 87),child: Text("descriptiiiion completa nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),Container(width: 150,height: 225,color: const Color.fromARGB(255, 107, 107, 106),child: Text("ver mas Detalles aqui merge to main prod funciona correctamente el ultimo tag en ram nain"),),],
+      children: [Container(margin: EdgeInsets.all(15),width: 250,height: 225,color: const Color.fromARGB(220, 149, 227, 4),child: Text("descriptiiiion completa nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),Container(width: 150,height: 225,color: const Color.fromARGB(255, 107, 107, 106),child: Text("ver mas Detalles aqui merge to main prod funciona el new tag "),),],
     ),)
      
       ],
      )
+
 
  );
 
