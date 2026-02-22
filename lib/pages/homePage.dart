@@ -29,21 +29,29 @@ class _Homepagetate extends State<Homepage> {
   future: employeprovider.getUsers(),
   builder: (BuildContext context, AsyncSnapshot<List<Employe>> snapshot) {
     
-    // 🔄 Mientras carga
+    // Mientras carga
     if (snapshot.connectionState == ConnectionState.waiting) {
       return const Center(
         child: CircularProgressIndicator(),
       );
     }
 
-    // ❌ Si hay error
+    // Si hay error
     if (snapshot.hasError) {
       return Center(
-        child: Text('Error: ${snapshot.error}'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.error, color: const Color.fromARGB(255, 192, 16, 3), size: 50),
+             CircularProgressIndicator(color: Color.fromARGB(255, 242, 68, 5),),
+            SizedBox(height: 10),
+            Text('Error al cargar empleados'),
+          ],
+        ),
       );
     }
 
-    // ⚠️ Si no hay datos
+    // Si no hay datos
     if (!snapshot.hasData || snapshot.data!.isEmpty) {
       return const Center(
         child:Column(children: [
@@ -78,7 +86,7 @@ class _Homepagetate extends State<Homepage> {
             end: Alignment.bottomRight,
           ),
         ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Nww feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),
+        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("New feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),
          Container(
           decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(15),
