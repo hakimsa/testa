@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:testa/models/employe.dart';
-import 'package:testa/services/employeProvider.dart';
+
+import 'package:testa/services/employe_provider.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -86,7 +87,7 @@ class _Homepagetate extends State<Homepage> {
             end: Alignment.bottomRight,
           ),
         ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("New feature Production new tag recien en dev  rama main ",style: TextStyle(color: Colors.white),),),
+        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("New feature Develpment new tag recien en dev  rama main ",style: TextStyle(color: Colors.white),),),
          Container(
           decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(15),
@@ -96,7 +97,7 @@ class _Homepagetate extends State<Homepage> {
             end: Alignment.bottomRight,
           ),
           ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Description for  completa nuevo feature dev  new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),)
+        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Description for  completa nuevo feature dev  new tag recien en Develpment  rama main ",style: TextStyle(color: Colors.white),),)
         ,Container(
           decoration: BoxDecoration(
            borderRadius: BorderRadius.circular(15),
@@ -106,7 +107,7 @@ class _Homepagetate extends State<Homepage> {
             end: Alignment.bottomRight,
           ),
           ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Description for  completa nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),)
+        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Description for  completa nuevo feature Develpment new tag recien en Develpment  rama main ",style: TextStyle(color: Colors.white),),)
         
       ]),
      Divider(color: Colors.indigo,)
