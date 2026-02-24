@@ -6,149 +6,251 @@ class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
   @override
-  State<Homepage> createState() => _Homepagetate();
+  State<Homepage> createState() => _HomepageState();
 }
-Employeprovider employeprovider = Employeprovider();
-@override
-void initState() {
-  employeprovider.getUsers();
-  
-}
-class _Homepagetate extends State<Homepage> {
+
+class _HomepageState extends State<Homepage> {
+  final Employeprovider _employeprovider = Employeprovider();
+
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      employeprovider.getUsers();
-    });
     return Scaffold(
-
-     body: ListView(
-      children: [
-        SizedBox(height: 30,),
-      SizedBox(height: 300,child:   FutureBuilder<List<Employe>>(
-  future: employeprovider.getUsers(),
-  builder: (BuildContext context, AsyncSnapshot<List<Employe>> snapshot) {
-    
-    // Mientras carga
-    if (snapshot.connectionState == ConnectionState.waiting) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    // Si hay error
-    if (snapshot.hasError) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: const Color(0xFFF5F5F5),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            Icon(Icons.error, color: const Color.fromARGB(255, 192, 16, 3), size: 50),
-             CircularProgressIndicator(color: Color.fromARGB(255, 242, 68, 5),),
-            SizedBox(height: 10),
-            Text('Error al cargar empleados'),
+            const SizedBox(height: 30),
+
+            // ── Header ──────────────────────────────────────
+            const Text(
+              'Empleados',
+              style: TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF1A1A1A),
+              ),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              'Lista del equipo',
+              style: TextStyle(fontSize: 14, color: Color(0xFF9E9E9E)),
+            ),
+            const SizedBox(height: 24),
+
+            // ── Employee list ────────────────────────────────
+            SizedBox(
+              height: 320,
+              child: FutureBuilder<List<Employe>>(
+                future: _employeprovider.getUsers(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Color(0xFF1A1A1A),
+                        strokeWidth: 2,
+                      ),
+                    );
+                  }
+
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.error_outline,
+                              color: Color(0xFF9E9E9E), size: 40),
+                          SizedBox(height: 8),
+                          Text(
+                            'Error al cargar empleados',
+                            style: TextStyle(color: Color(0xFF9E9E9E)),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(Icons.people_outline,
+                              color: Color(0xFF9E9E9E), size: 40),
+                          SizedBox(height: 8),
+                          Text(
+                            'No hay empleados disponibles',
+                            style: TextStyle(color: Color(0xFF9E9E9E)),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
+                  final employees = snapshot.data!;
+                  return ListView.separated(
+                    itemCount: employees.length,
+                    separatorBuilder: (_, __) => const Divider(height: 1),
+                    itemBuilder: (context, index) =>
+                        _EmployeeCard(employee: employees[index]),
+                  );
+                },
+              ),
+            ),
+
+            const SizedBox(height: 24),
+
+            // ── Action buttons ───────────────────────────────
+            Row(
+              children: [
+                _ActionButton(label: 'Agregar', onPressed: () {}),
+                const SizedBox(width: 10),
+                _ActionButton(label: 'Actualizar', onPressed: () {}),
+                const SizedBox(width: 10),
+                _ActionButton(label: 'Eliminar', onPressed: () {}, danger: true),
+              ],
+            ),
+
+            const SizedBox(height: 28),
+
+            // ── Feature cards ────────────────────────────────
+            SizedBox(
+              height: 140,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  _FeatureCard(
+                    text: 'New feature en producción — rama main',
+                    colors: [Color(0xFF1A1A2E), Color(0xFF16213E)],
+                  ),
+                  SizedBox(width: 12),
+                  _FeatureCard(
+                    text: 'Descripción completa del nuevo feature',
+                    colors: [Color(0xFF2C3E50), Color(0xFF4CA1AF)],
+                  ),
+                  SizedBox(width: 12),
+                  _FeatureCard(
+                    text: 'Novedades del release en rama main',
+                    colors: [Color(0xFF373B44), Color(0xFF4286f4)],
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 30),
           ],
         ),
-      );
-    }
-
-    // Si no hay datos
-    if (!snapshot.hasData || snapshot.data!.isEmpty) {
-      return const Center(
-        child:Column(children: [
-          Divider(),
-          CircularProgressIndicator(color: Color.fromARGB(255, 180, 15, 209),),
-           Text('No hay empleados ok disponibles')
-        ],),
-      );
-    }
-
-    //  Cuando hay datos
-    final employees = snapshot.data!;
-
-    return ListView.builder(
-      itemCount: employees.length,
-      itemBuilder: (BuildContext context, int index) {
-        return  _cardlistEmployee(context,employees,index);
-      },
+      ),
     );
-  },
-),),SizedBox.fromSize(size: Size.fromHeight(20),)
-    , Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        
-        Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-           gradient: LinearGradient(
-            colors: [Color.fromARGB(220, 2, 69, 46), Color.fromARGB(220, 1, 57, 6)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+  }
+}
+
+// ── Employee card ──────────────────────────────────────────────────────────────
+class _EmployeeCard extends StatelessWidget {
+  final Employe employee;
+  const _EmployeeCard({required this.employee});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(vertical: 8),
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: SizedBox(
+          width: 44,
+          height: 44,
+          child: FadeInImage.assetNetwork(
+            placeholder: 'assets/images/no-image.png',
+            image: employee.imageUrl.isNotEmpty
+                ? employee.imageUrl
+                : 'https://via.placeholder.com/44',
+            fit: BoxFit.cover,
+            imageErrorBuilder: (_, __, ___) => Image.asset(
+              'assets/images/no-image.png',
+              fit: BoxFit.cover,
+            ),
           ),
         ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("New feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),),
-         Container(
-          decoration: BoxDecoration(
-           borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-            colors: [Color.fromARGB(220, 0, 0, 0), Color.fromARGB(220, 208, 226, 13)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Description for  completa nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),)
-        ,Container(
-          decoration: BoxDecoration(
-           borderRadius: BorderRadius.circular(15),
-          gradient: LinearGradient(
-            colors: [Color.fromARGB(220, 1, 48, 32), Color.fromARGB(220, 1, 65, 44)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          ),
-        padding: EdgeInsets.all(15),width: 250,height: 225,child: Text("Description for  completa nuevo feature Production new tag recien en prod  rama main ",style: TextStyle(color: Colors.white),),)
-        
-      ]),
-     Divider(color: Colors.indigo,)
-      ],
-     )
-
-
- );
-
+      ),
+      title: Text(
+        employee.name,
+        style: const TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+          color: Color(0xFF1A1A1A),
+        ),
+      ),
+      subtitle: Text(
+        employee.email,
+        style: const TextStyle(fontSize: 13, color: Color(0xFF9E9E9E)),
+      ),
+      trailing: Text(
+        employee.jobTitle,
+        style: const TextStyle(fontSize: 12, color: Color(0xFF757575)),
+      ),
+    );
   }
-  
- Card _cardlistEmployee(BuildContext context, List<Employe> employees, int index) {
-final employee = employees[index];
-    return Card(
-      margin: EdgeInsets.symmetric(vertical: 10.55,horizontal: 10),
-          child: ListTile(
-            title: Text(employee.name), // ajusta según tu modelo
-            subtitle: Text(employee.email), 
-            contentPadding: EdgeInsets.all(10),
-            leading: SizedBox(
-  width: 45,
-  height: 45,
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(12), // opcional
-    child: FadeInImage.assetNetwork(
-      placeholder: 'assets/images/no-image.png',
-      image: (employee.imageUrl.isNotEmpty)
-          ? employee.imageUrl
-          : 'https://via.placeholder.com/25',
-      fit: BoxFit.cover,
-      imageErrorBuilder: (context, error, stackTrace) {
-        return Image.asset(
-          'assets/images/no-image.png',
-          fit: BoxFit.cover,
-        );
-      },
-    ),
-  ),
-),
-            trailing: Text(employee.jobTitle),
-            textColor: const Color.fromARGB(221, 73, 72, 72),// si existe
+}
+
+// ── Action button ──────────────────────────────────────────────────────────────
+class _ActionButton extends StatelessWidget {
+  final String label;
+  final VoidCallback onPressed;
+  final bool danger;
+
+  const _ActionButton({
+    required this.label,
+    required this.onPressed,
+    this.danger = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+          backgroundColor: danger ? const Color(0xFFFFEBEE) : const Color(0xFFEEEEEE),
+          foregroundColor: danger ? const Color(0xFFC62828) : const Color(0xFF1A1A1A),
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-        );
+        ),
+        child: Text(label, style: const TextStyle(fontSize: 13)),
+      ),
+    );
+  }
+}
+
+// ── Feature card ───────────────────────────────────────────────────────────────
+class _FeatureCard extends StatelessWidget {
+  final String text;
+  final List<Color> colors;
+
+  const _FeatureCard({required this.text, required this.colors});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        gradient: LinearGradient(
+          colors: colors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 13,
+          height: 1.5,
+        ),
+      ),
+    );
   }
 }
