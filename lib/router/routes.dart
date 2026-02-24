@@ -8,7 +8,7 @@ Map<String,WidgetBuilder>getApplitionRoute  (){
  
 return <String,WidgetBuilder>{
 
-'/':(context)=> HomePage()
+'/':(context)=> Homepage()
 
 };
 
